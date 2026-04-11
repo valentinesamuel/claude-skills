@@ -1,0 +1,14 @@
+agents/core-development/fullstack-engineer.md
+agents/core-development/api-designer.md
+agents/core-development/backend-developer.md
+agents/infrastructure/cloud-architect.md
+agents/infrastructure/security-engineer.md
+agents/quality-assurance/security-auditor.md
+agents/quality-assurance/code-reviewer.md
+agents2/nextjs-developer.md
+agents2/react-specialist.md
+agents2/typescript-pro.md
+agents2/devops-engineer.md
+agents2/sre-engineer.md
+agents2/performance-engineer.md
+agents2/accessibility-tester.md

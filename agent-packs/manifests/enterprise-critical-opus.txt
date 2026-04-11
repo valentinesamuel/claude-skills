@@ -1,0 +1,17 @@
+agents/core-development/microservices-architect.md
+agents/core-development/event-driven-architect.md
+agents/core-development/backend-developer.md
+agents/core-development/api-designer.md
+agents/infrastructure/security-engineer.md
+agents/infrastructure/cloud-architect.md
+agents/infrastructure/platform-engineer.md
+agents/infrastructure/database-admin.md
+agents/infrastructure/sre-engineer.md
+agents/infrastructure/devops-engineer.md
+agents/quality-assurance/security-auditor.md
+agents/quality-assurance/test-architect.md
+agents/quality-assurance/error-detective.md
+agents2/penetration-tester.md
+agents2/compliance-auditor.md
+agents2/legal-advisor.md
+agents2/code-reviewer.md

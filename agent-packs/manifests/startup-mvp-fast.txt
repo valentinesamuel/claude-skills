@@ -1,0 +1,12 @@
+agents2/fullstack-developer.md
+agents2/frontend-developer.md
+agents2/nextjs-developer.md
+agents2/react-specialist.md
+agents2/typescript-pro.md
+agents2/javascript-pro.md
+agents2/devops-engineer.md
+agents2/sre-engineer.md
+agents2/deployment-engineer.md
+agents2/qa-expert.md
+agents2/debugger.md
+agents2/ui-designer.md
