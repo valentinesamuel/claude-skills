@@ -1,0 +1,3 @@
+agents/infrastructure/cloud-architect.md
+agents/infrastructure/platform-engineer.md
+agents/infrastructure/database-admin.md

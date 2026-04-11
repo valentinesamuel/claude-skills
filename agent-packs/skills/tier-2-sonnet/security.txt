@@ -1,0 +1,2 @@
+agents2/security-auditor.md
+agents2/legal-advisor.md
