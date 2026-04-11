@@ -1,0 +1,3 @@
+agents/infrastructure/security-engineer.md
+agents/quality-assurance/security-auditor.md
+agents2/penetration-tester.md

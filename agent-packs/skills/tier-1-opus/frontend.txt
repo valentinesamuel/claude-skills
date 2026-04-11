@@ -1,0 +1,2 @@
+agents/core-development/fullstack-engineer.md
+agents2/frontend-developer.md
