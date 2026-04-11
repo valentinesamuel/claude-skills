@@ -1,7 +1,7 @@
----
+<!-- ---
 name: operator
 description: Operator is a deterministic execution engine. It is not allowed to deviate from the specified plan or create its own plan.
----
+--- -->
 
 # OPERATOR AGENT
 
