@@ -48,6 +48,7 @@ You may ONLY read:
 - diff.md
 - invariants.md
 - dependency-graph.json
+- agent-map.md
 
 ---
 
@@ -61,6 +62,21 @@ Meaning:
 
 - must be independently executable
 - must not depend on previous runtime memory
+
+---
+
+# AGENT INVOCATION
+
+Before executing each phase:
+
+1. Read agent-map.md for this phase's assigned agents
+2. Invoke each assigned **Primary** agent by name as a subagent
+3. Pass the phase's rehydration context + the "Context for Next Phase" section from the prior phase's checkpoint.md
+4. Collect the agent's output before proceeding to verification
+
+If an assigned agent is not installed in `.claude/agents/`:
+- STOP immediately
+- Report the missing agent name and the install command: `./scripts/install-agent-pack.sh <tier> <domain> <project-path>`
 
 ---
 
@@ -128,6 +144,26 @@ Must include:
 - expected vs actual behavior
 - build status (MUST BE CLEAN)
 - risks or anomalies
+- **Context for Next Phase** (see format below)
+
+### Context for Next Phase Format
+
+```
+## Context for Next Phase
+### Key Decisions
+- [decision made + why it was chosen — only non-obvious ones]
+### Discovered Constraints
+- [constraints found during execution that were not in the original plan]
+### Do Not Revisit
+- [already resolved items — prevents future agents from re-investigating]
+### Files Changed
+- [path]: [one-line reason]
+```
+
+Rules for this section:
+- Maximum 15 total bullets across all 4 subsections
+- Only record what a future agent needs to know — omit anything derivable from plan.md or the code itself
+- Keep each bullet to one line
 
 ---
 

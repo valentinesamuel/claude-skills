@@ -11,7 +11,6 @@ agents/infrastructure/devops-engineer.md
 agents/quality-assurance/security-auditor.md
 agents/quality-assurance/test-architect.md
 agents/quality-assurance/error-detective.md
-agents2/penetration-tester.md
-agents2/compliance-auditor.md
-agents2/legal-advisor.md
-agents2/code-reviewer.md
+agents/quality-assurance/code-reviewer.md
+agents/specialized/penetration-tester.md
+agents/specialized/compliance-auditor.md
