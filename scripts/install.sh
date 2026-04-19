@@ -57,12 +57,19 @@ fetch_file() {
   local rel="$1"
   local dest="$2"
   local url="${BASE_URL}/${rel}"
+  local label
+  # For SKILL.md files, show the parent directory name (the skill name)
+  if [[ "$(basename "${dest}")" == "SKILL.md" ]]; then
+    label="$(basename "$(dirname "${dest}")")/SKILL.md"
+  else
+    label="$(basename "${dest}")"
+  fi
   mkdir -p "$(dirname "${dest}")"
   if ! curl -fsSL -o "${dest}" "${url}" 2>/dev/null; then
     warn "Could not fetch ${rel} — skipping"
     return 1
   fi
-  ok "$(basename "${dest}")"
+  ok "${label}"
   return 0
 }
 
@@ -128,14 +135,11 @@ mkdir -p "${AGENTS_DEST}" "${SKILLS_DEST}"
 agent_count=0
 skill_count=0
 
-# 1. Always install orchestration slash-command skills + oracle subagent
+# 1. Always install orchestration skills (/de, /oracle, /operator) + oracle subagent
 hdr "Installing orchestration skills (/de, /oracle, /operator)"
-# Skills — invokable via slash commands by the user
-fetch_file "skills/de.md"       "${SKILLS_DEST}/de.md"       && (( skill_count++ )) || true
-fetch_file "skills/oracle.md"   "${SKILLS_DEST}/oracle.md"   && (( skill_count++ )) || true
-fetch_file "skills/operator.md" "${SKILLS_DEST}/operator.md" && (( skill_count++ )) || true
-
-hdr "Installing oracle subagent"
+fetch_file "skills/de/SKILL.md"       "${SKILLS_DEST}/de/SKILL.md"       && (( skill_count++ )) || true
+fetch_file "skills/oracle/SKILL.md"   "${SKILLS_DEST}/oracle/SKILL.md"   && (( skill_count++ )) || true
+fetch_file "skills/operator/SKILL.md" "${SKILLS_DEST}/operator/SKILL.md" && (( skill_count++ )) || true
 # Oracle also goes in agents/ so distinguished-engineer can spawn it as a subagent
 fetch_file "agents/oracle.md" "${AGENTS_DEST}/oracle.md" && (( agent_count++ )) || true
 
@@ -189,13 +193,13 @@ fi
 
 # Vercel skill if frontend selected
 if [[ "${SELECTED[1]:-0}" -eq 1 ]]; then
-  if fetch_file "skills/vercel-react-best-practices.md" "${SKILLS_DEST}/vercel-react-best-practices.md"; then
+  if fetch_file "skills/vercel-react-best-practices/SKILL.md" "${SKILLS_DEST}/vercel-react-best-practices/SKILL.md"; then
     (( skill_count++ )) || true
   fi
 fi
 
 for skill_name in "${skills_to_install[@]+"${skills_to_install[@]}"}"; do
-  if fetch_file "skills/${skill_name}.md" "${SKILLS_DEST}/${skill_name}.md"; then
+  if fetch_file "skills/${skill_name}/SKILL.md" "${SKILLS_DEST}/${skill_name}/SKILL.md"; then
     (( skill_count++ )) || true
   fi
 done
