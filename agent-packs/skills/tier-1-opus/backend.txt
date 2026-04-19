@@ -1,2 +1,2 @@
-agents/core-development/backend-developer.md
-agents/core-development/api-designer.md
+agents/backend-developer.md
+agents/api-designer.md

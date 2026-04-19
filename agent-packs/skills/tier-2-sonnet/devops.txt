@@ -1,2 +1,2 @@
-agents/infrastructure/devops-engineer.md
-agents/infrastructure/sre-engineer.md
+agents/devops-engineer.md
+agents/sre-engineer.md

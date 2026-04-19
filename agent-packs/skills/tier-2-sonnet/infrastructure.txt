@@ -1,2 +1,2 @@
-agents/infrastructure/cloud-architect.md
-agents/infrastructure/security-engineer.md
+agents/cloud-architect.md
+agents/security-engineer.md

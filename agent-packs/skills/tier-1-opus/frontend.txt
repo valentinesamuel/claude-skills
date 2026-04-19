@@ -1,4 +1,4 @@
-agents/core-development/fullstack-engineer.md
-agents/specialized/frontend-developer.md
-agents/specialized/nextjs-developer.md
-agents/specialized/react-specialist.md
+agents/fullstack-engineer.md
+agents/frontend-developer.md
+agents/nextjs-developer.md
+agents/react-specialist.md

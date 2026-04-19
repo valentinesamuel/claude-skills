@@ -128,17 +128,16 @@ mkdir -p "${AGENTS_DEST}" "${SKILLS_DEST}"
 agent_count=0
 skill_count=0
 
-# 1. Always install orchestration agents
+# 1. Always install orchestration agents + their slash-command skills
 hdr "Installing orchestration agents"
-for rel in \
-    "distinguished-engineer/SKILL.md" \
-    "oracle/SKILL.md" \
-    "operator/SKILL.md"; do
+fetch_file "agents/distinguished-engineer.md" "${AGENTS_DEST}/distinguished-engineer.md" && (( agent_count++ )) || true
+fetch_file "skills/de.md"                      "${SKILLS_DEST}/de.md"                      && (( skill_count++ )) || true
 
-  dir_name="$(basename "$(dirname "${rel}")")"
-  dest="${AGENTS_DEST}/${dir_name}.md"
-  if fetch_file "${rel}" "${dest}"; then (( agent_count++ )) || true; fi
-done
+fetch_file "agents/oracle.md"   "${AGENTS_DEST}/oracle.md"   && (( agent_count++ )) || true
+fetch_file "skills/oracle.md"   "${SKILLS_DEST}/oracle.md"   && (( skill_count++ )) || true
+
+fetch_file "agents/operator.md" "${AGENTS_DEST}/operator.md" && (( agent_count++ )) || true
+fetch_file "skills/operator.md" "${SKILLS_DEST}/operator.md" && (( skill_count++ )) || true
 
 # 2. Install selected domain packs
 hdr "Installing domain agents"
@@ -190,13 +189,13 @@ fi
 
 # Vercel skill if frontend selected
 if [[ "${SELECTED[1]:-0}" -eq 1 ]]; then
-  if fetch_file "vercel-react-best-practices/SKILL.md" "${SKILLS_DEST}/vercel-react-best-practices.md"; then
+  if fetch_file "skills/vercel-react-best-practices.md" "${SKILLS_DEST}/vercel-react-best-practices.md"; then
     (( skill_count++ )) || true
   fi
 fi
 
 for skill_name in "${skills_to_install[@]+"${skills_to_install[@]}"}"; do
-  if fetch_file "skills/${skill_name}/SKILL.md" "${SKILLS_DEST}/${skill_name}.md"; then
+  if fetch_file "skills/${skill_name}.md" "${SKILLS_DEST}/${skill_name}.md"; then
     (( skill_count++ )) || true
   fi
 done
@@ -217,7 +216,7 @@ echo -e "  ${BOLD}Agents${RESET}  → ${PROJECT_PATH}/.claude/agents/   (${agent
 echo -e "  ${BOLD}Skills${RESET}  → ${PROJECT_PATH}/.claude/skills/    (${skill_count} files)"
 echo ""
 echo -e "  ${BOLD}Workflow:${RESET}"
-echo "  1. /distinguished-engineer <your problem>"
+echo "  1. /de <your problem>"
 echo "  2. Review artifacts in .claude/artifacts/"
 echo "  3. /operator execute phases <N> from plan.md"
 echo ""

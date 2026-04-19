@@ -7,7 +7,12 @@
       "Bash(git *)",
       "Bash(chmod +x *)",
       "Bash(bash ../scripts/install.sh ./)",
-      "Bash(bash /Users/valentinesamuel/Documents/claude-skills/scripts/install.sh /Users/valentinesamuel/Documents/claude-skills/claudeTestProj)"
+      "Bash(bash /Users/valentinesamuel/Documents/claude-skills/scripts/install.sh /Users/valentinesamuel/Documents/claude-skills/claudeTestProj)",
+      "Bash(grep -E \"\\\\.\\(md|json|yaml|yml\\)$\")",
+      "Bash(xargs sed *)",
+      "Bash(cp /Users/valentinesamuel/Documents/claude-skills/skills/de.md /Users/valentinesamuel/Documents/claude-skills/testProject/.claude/skills/de.md)",
+      "Bash(cp /Users/valentinesamuel/Documents/claude-skills/skills/oracle.md /Users/valentinesamuel/Documents/claude-skills/testProject/.claude/skills/oracle.md)",
+      "Bash(cp /Users/valentinesamuel/Documents/claude-skills/skills/operator.md /Users/valentinesamuel/Documents/claude-skills/testProject/.claude/skills/operator.md)"
     ]
   }
 }

@@ -1,3 +1,3 @@
-agents/quality-assurance/security-auditor.md
-agents/specialized/compliance-auditor.md
-agents/specialized/penetration-tester.md
+agents/security-auditor.md
+agents/compliance-auditor.md
+agents/penetration-tester.md

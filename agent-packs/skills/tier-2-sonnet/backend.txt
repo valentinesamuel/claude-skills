@@ -1,1 +1,1 @@
-agents/core-development/fullstack-engineer.md
+agents/fullstack-engineer.md

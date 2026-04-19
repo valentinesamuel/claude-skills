@@ -1,2 +1,2 @@
-agents/quality-assurance/performance-engineer.md
-agents/quality-assurance/error-detective.md
+agents/performance-engineer.md
+agents/error-detective.md

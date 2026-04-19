@@ -1,1 +1,1 @@
-agents/infrastructure/deployment-engineer.md
+agents/deployment-engineer.md

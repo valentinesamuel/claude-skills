@@ -1,2 +1,2 @@
-agents/quality-assurance/performance-engineer.md
-agents/specialized/debugger.md
+agents/performance-engineer.md
+agents/debugger.md
