@@ -3,7 +3,10 @@
     "allow": [
       "Bash(chmod +x /Users/valentinesamuel/Documents/claude-skills/scripts/setup.sh)",
       "Bash(bash -n /Users/valentinesamuel/Documents/claude-skills/scripts/setup.sh)",
-      "Bash(../scripts/setup.sh ./)"
+      "Bash(../scripts/setup.sh ./)",
+      "Bash(git *)",
+      "Bash(chmod +x *)",
+      "Bash(bash ../scripts/install.sh ./)"
     ]
   }
 }

@@ -1,6 +1,6 @@
 # Claude Skills
 
-A curated library of Claude Code agents, reference skills, and an orchestration system for production-grade software engineering. Clone this repo once, then install into any project with a single command.
+A curated library of Claude Code agents, reference skills, and an orchestration system for production-grade software engineering. Install into any project with a single `curl` command — no cloning required.
 
 ---
 
@@ -22,41 +22,39 @@ A curated library of Claude Code agents, reference skills, and an orchestration 
 ## Prerequisites
 
 - [Claude Code](https://claude.ai/code) installed and authenticated
-- `bash` 4+ (macOS ships with bash 3 — use `brew install bash` if needed, or `zsh` works too)
+- `curl` (pre-installed on macOS and most Linux distros)
 - A Claude account with access to Opus 4 (the agents are tuned for Opus-class models)
 
 ---
 
 ## Quickstart
 
-### 1. Clone the repo
+### 1. Install into your project
+
+Run the one-liner, passing the path to your project:
 
 ```bash
-git clone https://github.com/valentinesamuel/claude-skills.git
-cd claude-skills
-chmod +x scripts/setup.sh scripts/install-agent-pack.sh
+curl -fsSL https://raw.githubusercontent.com/valentinesamuel/claude-skills/main/scripts/install.sh | bash -s -- /path/to/your-project
 ```
 
-### 2. Install into your project
-
-Run the setup script from inside the `claude-skills` directory, passing the path to your project:
+Or omit the path to be prompted interactively:
 
 ```bash
-./scripts/setup.sh /path/to/your-project
+curl -fsSL https://raw.githubusercontent.com/valentinesamuel/claude-skills/main/scripts/install.sh | bash
 ```
 
-The script will:
+The installer will:
 
 1. Always install `distinguished-engineer`, `oracle`, and `operator` into your project's `.claude/agents/`
 2. Show an interactive menu — toggle which domain packs you want
-3. Copy the selected domain agents into `.claude/agents/`
-4. Copy the relevant reference skills into `.claude/skills/`
+3. Fetch the selected domain agents directly from GitHub into `.claude/agents/`
+4. Fetch the relevant reference skills into `.claude/skills/`
 5. Write an installation manifest at `.claude/agents/_setup-manifest.txt`
 
 Example session:
 
 ```
-Distinguished Engineer Setup
+Distinguished Engineer Setup  (remote install)
   Target: /path/to/your-project
 
 Select domain packs  (toggle number, Enter to confirm)
@@ -73,13 +71,27 @@ Select domain packs  (toggle number, Enter to confirm)
   > 1 3 6
 ```
 
-### 3. Start working
+### 2. Start working
 
 Open your project in Claude Code and call the distinguished engineer:
 
 ```
 /distinguished-engineer <describe your problem, feature, or bug>
 ```
+
+---
+
+## Local / Development Install
+
+If you are contributing to this repo or prefer a local workflow, clone and run the local setup script instead:
+
+```bash
+git clone https://github.com/valentinesamuel/claude-skills.git
+cd claude-skills
+./scripts/setup.sh /path/to/your-project
+```
+
+`setup.sh` and `install.sh` are functionally identical — the only difference is that `setup.sh` copies files from your local clone while `install.sh` fetches them from GitHub.
 
 ---
 
@@ -325,7 +337,8 @@ claude-skills/
 │       ├── tier-2-sonnet/        # Domain packs for Sonnet-class models
 │       └── tier-3-haiku/         # Domain packs for Haiku-class models
 ├── scripts/
-│   ├── setup.sh                  # Interactive setup for new projects
+│   ├── install.sh                # Remote one-liner installer (fetches from GitHub)
+│   ├── setup.sh                  # Local installer (reads from cloned repo)
 │   └── install-agent-pack.sh     # Granular pack installer
 └── instructions.md               # Principal engineer mindset reference
 ```
