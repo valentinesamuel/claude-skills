@@ -33,6 +33,12 @@ if ! command -v curl &>/dev/null; then
   exit 1
 fi
 
+# When piped via curl | bash, stdin is the script — reopen it from the terminal
+# so interactive prompts and menus work correctly.
+if [[ ! -t 0 ]]; then
+  exec </dev/tty
+fi
+
 # ── resolve project path ──────────────────────────────────────────────────────
 if [[ $# -ge 1 ]]; then
   PROJECT_PATH="$1"
