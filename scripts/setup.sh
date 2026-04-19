@@ -63,14 +63,13 @@ DOMAIN_LABELS=(
 )
 
 # Skills to copy per domain (space-separated skill dir names from skills/)
-declare -A DOMAIN_SKILLS
-DOMAIN_SKILLS[backend]="api-design-patterns microservices-design database-optimization golang-idioms redis-patterns postgres-optimization"
-DOMAIN_SKILLS[frontend]="api-design-patterns authentication-patterns performance-optimization"
-DOMAIN_SKILLS[infrastructure]="monitoring-observability database-optimization postgres-optimization"
-DOMAIN_SKILLS[devops]="monitoring-observability"
-DOMAIN_SKILLS[observability]="monitoring-observability performance-optimization"
-DOMAIN_SKILLS[security]="security-hardening authentication-patterns"
-DOMAIN_SKILLS[specialized]=""
+DOMAIN_SKILLS_backend="api-design-patterns microservices-design database-optimization golang-idioms redis-patterns postgres-optimization"
+DOMAIN_SKILLS_frontend="api-design-patterns authentication-patterns performance-optimization"
+DOMAIN_SKILLS_infrastructure="monitoring-observability database-optimization postgres-optimization"
+DOMAIN_SKILLS_devops="monitoring-observability"
+DOMAIN_SKILLS_observability="monitoring-observability performance-optimization"
+DOMAIN_SKILLS_security="security-hardening authentication-patterns"
+DOMAIN_SKILLS_specialized=""
 
 # Selection state: 0 = off, 1 = on
 declare -a SELECTED
@@ -172,18 +171,28 @@ done
 hdr "Installing reference skills"
 
 # Collect unique skills across selected domains
-declare -A skill_set
+skills_to_install=()
+_add_skill() {
+  local s="$1"
+  local x
+  for x in "${skills_to_install[@]+"${skills_to_install[@]}"}"; do
+    [[ "$x" == "$s" ]] && return 0
+  done
+  skills_to_install+=("$s")
+}
+
 for i in "${!DOMAIN_KEYS[@]}"; do
   [[ "${SELECTED[$i]}" -eq 0 ]] && continue
   domain="${DOMAIN_KEYS[$i]}"
-  for skill_name in ${DOMAIN_SKILLS[$domain]:-}; do
-    skill_set["${skill_name}"]=1
+  varname="DOMAIN_SKILLS_${domain}"
+  for skill_name in ${!varname}; do
+    _add_skill "${skill_name}"
   done
 done
 
 # Always install websocket-realtime (useful with backend/infra)
-if [[ "${#skill_set[@]}" -gt 0 ]]; then
-  skill_set[websocket-realtime]=1
+if [[ "${#skills_to_install[@]}" -gt 0 ]]; then
+  _add_skill "websocket-realtime"
 fi
 
 # Install vercel skill if frontend selected
@@ -194,7 +203,7 @@ if [[ "${SELECTED[1]:-0}" -eq 1 ]] && [[ -f "${VERCEL_SKILL}/SKILL.md" ]]; then
   skills_installed+=("vercel-react-best-practices")
 fi
 
-for skill_name in "${!skill_set[@]}"; do
+for skill_name in "${skills_to_install[@]+"${skills_to_install[@]}"}"; do
   src_skill="${SKILLS_DIR}/${skill_name}/SKILL.md"
   if [[ -f "${src_skill}" ]]; then
     cp "${src_skill}" "${SKILLS_DEST}/${skill_name}.md"
