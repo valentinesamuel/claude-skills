@@ -33,18 +33,12 @@ if ! command -v curl &>/dev/null; then
   exit 1
 fi
 
-# When piped via curl | bash, stdin is the script — reopen it from the terminal
-# so interactive prompts and menus work correctly.
-if [[ ! -t 0 ]]; then
-  exec </dev/tty
-fi
-
 # ── resolve project path ──────────────────────────────────────────────────────
 if [[ $# -ge 1 ]]; then
   PROJECT_PATH="$1"
 else
   echo ""
-  read -rp "  Project path: " PROJECT_PATH
+  read -rp "  Project path: " PROJECT_PATH </dev/tty
 fi
 
 PROJECT_PATH="${PROJECT_PATH/#\~/$HOME}"
@@ -116,7 +110,7 @@ while true; do
   hdr "Distinguished Engineer Setup  (remote install)"
   echo -e "  Target: ${BOLD}${PROJECT_PATH}${RESET}"
   print_menu
-  read -rp "  > " input
+  read -rp "  > " input </dev/tty
 
   [[ -z "${input}" ]] && break
 

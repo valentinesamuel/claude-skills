@@ -6,7 +6,8 @@
       "Bash(../scripts/setup.sh ./)",
       "Bash(git *)",
       "Bash(chmod +x *)",
-      "Bash(bash ../scripts/install.sh ./)"
+      "Bash(bash ../scripts/install.sh ./)",
+      "Bash(bash /Users/valentinesamuel/Documents/claude-skills/scripts/install.sh /Users/valentinesamuel/Documents/claude-skills/claudeTestProj)"
     ]
   }
 }
